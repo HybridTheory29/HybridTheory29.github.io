@@ -100,7 +100,7 @@ body{
     line-height: 0;
     position: absolute;
     right: 60px;
-    margin-top: 21px;
+    top: 21px;
     -webkit-text-stroke: 1.2px black;
 }
 
