@@ -37,12 +37,6 @@ body{
     text-decoration: underline;
 }
 
-#search-add-wrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-}
 
 .task-wrapper{
     display: flex;
@@ -82,9 +76,9 @@ body{
     text-decoration: none;
     font-weight: 900;
     color: #cf4949;
-    font-size: 33px;
+    font-size: 27px;
     line-height: 0;
-    -webkit-text-stroke: 1.2px black;
+    
 }
 
 .inimp-butt {
@@ -93,8 +87,8 @@ body{
     font-size: 23px;
     line-height: 0;
     position: absolute;
-    right: 70px;
-    margin-top: 4px;
+    right: 60px;
+    top: 21px;
     -webkit-text-stroke: 1.2px black;
 }
 
@@ -105,19 +99,19 @@ body{
     font-size: 23px;
     line-height: 0;
     position: absolute;
-    right: 70px;
-    margin-top: 4px;
+    right: 60px;
+    margin-top: 21px;
     -webkit-text-stroke: 1.2px black;
 }
 
 .complete-link {
     text-decoration: none;
     color: #29d810;
-    font-size: 23px;
+    font-size: 35px;
     line-height: 0;
     position: absolute;
-    right: 110px;
-    margin-top: 4px;
+    right: 93px;
+    top: 16px;
     -webkit-text-stroke: 1.2px black;
 }
 #search-add-wrapper {
@@ -133,11 +127,15 @@ body{
     color: #fff;
     padding: 15px 20px;
 }
+#search-add-wrapper .search{
+    margin-left: 38px;
+}
 
 #add-link {
-    color: #cf4949;
+    color: #fff;
     text-decoration: none;
-    font-size: 42px;
-    -webkit-text-stroke: 1.2px black;
-    margin-right: 10px;
+    font-size: 35px;
+    -webkit-text-stroke: 0.5px black;
+    margin-right: 17px;
+    line-height: 0;
 }

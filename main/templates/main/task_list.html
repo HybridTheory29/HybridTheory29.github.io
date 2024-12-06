@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>task list</title>
     <link rel="stylesheet" href="../../static/main/main_style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 {% load users_extras %}
@@ -23,10 +24,10 @@
 
 <div id="search-add-wrapper">
     <form method="GET" style="margin-top: 20px; display: flex;">
-        <input type="text" name="search-area" value="{{ search_input }}">
+        <input class="search" type="text" name="search-area" value="{{ search_input }}">
         <input class="button" type="submit" value="Поиск">
     </form>
-    <a id="add-link" href="{% url 'task-create' %}">&#x2b;</a>
+    <a id="add-link" href="{% url 'task-create' %}"><i class='bx bx-plus-circle'></i></a>
 </div>
 
 <div class="task-items-wrapper">
@@ -38,20 +39,21 @@
                         <s><a href="{% url 'task-update' task.id %}">{{ task }}</a></s>
                     </div>
                 </div>
+                <a class="complete-link" href="{% url 'task-complete' task.id %}"><i class='bx bx-check-double' ></i></a>
             {% else %}
                 <div class="task-title">
                     <div class="task-incomplete-icon">
                         <a href="{% url 'task-update' task.id %}">{{ task }}</a>
                     </div>
                 </div>
+                <a class="complete-link" href="{% url 'task-complete' task.id %}"><i class='bx bx-check' ></i></a>
             {% endif %}
             {% if task.important %}
-                <a class="imp-butt" href="{% url 'important-item' task.id %}">&#10022;</a>
+                <a class="imp-butt" href="{% url 'important-item' task.id %}"><i class='bx bxs-star'></i></a>
             {% else %}
-                <a class="inimp-butt" href="{% url 'important-item' task.id %}">&#10022;</a>
+                <a class="inimp-butt" href="{% url 'important-item' task.id %}"><i class='bx bx-star' ></i></a>
             {% endif %}
-            <a class="complete-link" href="{% url 'task-complete' task.id %}">&#10004;</a>
-            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            <a class="delete-link" href="{% url 'task-delete' task.id %}"><i class='bx bx-x-circle'></i></a>
         </div>
     {% empty %}
     {% endfor %}
