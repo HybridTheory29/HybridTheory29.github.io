@@ -23,7 +23,7 @@ body{
     background: #6F97A3;
     background: linear-gradient(135deg, #6F97A3, #385BB1);
     box-shadow: 0 0 10px rgb(0, 0, 0, .2);
-    color: #fff;
+    color: #f2e9e9;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 15px 20px;
@@ -83,13 +83,13 @@ body{
 
 .inimp-butt {
     text-decoration: none;
-    color: #76797d;
+    color: #333;
     font-size: 23px;
     line-height: 0;
     position: absolute;
     right: 60px;
     top: 21px;
-    -webkit-text-stroke: 0.9px black;
+    -webkit-text-stroke: 0.5px black;
 }
 
 
@@ -127,15 +127,47 @@ body{
     color: #fff;
     padding: 15px 20px;
 }
-#search-add-wrapper .search{
-    margin-left: 38px;
+#search-add-wrapper .search-form{
+    border: 1.5px solid rgb(255, 255, 255, .2);
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 0;
+    border-radius: 5px;
+}
+.search-area{
+    border: none;
+    width: 150px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 10px;
+    background-color: #7a7a7a;
+    height: 25px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#search-add-wrapper input::placeholder{
+    color: #333;
+}
+#search-add-wrapper button{
+    border: none;
+    height: 25px;
+    background-color: #7a7a7a;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#search-add-wrapper .button i{
+    display: flex;
+    justify-content: center;
+    line-height: 0;
+    font-size: 15px;
 }
 
 #add-link {
     color: #fff;
     text-decoration: none;
-    font-size: 35px;
-    -webkit-text-stroke: 0.5px black;
+    font-size: 33px;
+    -webkit-text-stroke: 0.7px black;
     margin-right: 14px;
-    line-height: 0;
+    line-height: 0; 
 }

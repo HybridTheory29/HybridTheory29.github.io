@@ -24,9 +24,9 @@
 </div>
 
 <div id="search-add-wrapper">
-    <form method="GET" style="margin-top: 20px; display: flex;">
-        <input class="search" type="text" name="search-area" value="{{ search_input }}">
-        <input class="button" type="submit" value="Поиск">
+    <form class="search-form" method ="GET">
+        <input class="search-area" type="text" name="search-area" value="{{ search_input }}" placeholder="Поиск...">
+        <button class="button"><i class='bx bx-search-alt'></i></button>
     </form>
     <a id="add-link" href="{% url 'task-create' %}"><i class='bx bx-plus-circle'></i></a>
 </div>

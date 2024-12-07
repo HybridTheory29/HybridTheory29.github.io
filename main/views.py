@@ -3,7 +3,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template.context_processors import request
 from django.views.generic.list import  ListView
-#from django.views.generic.detail import  DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -63,13 +62,6 @@ class TaskList(LoginRequiredMixin, ListView):
         context['search_input'] = search_input
 
         return context
-
-"""
-class TaskDetail(LoginRequiredMixin, DetailView):
-    model = Task
-    context_object_name = 'task'
-    template_name = 'main/task.html'
-"""
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
