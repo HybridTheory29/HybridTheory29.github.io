@@ -16,6 +16,15 @@ class Task(models.Model):
     class Meta:
         ordering = ['-important', 'complete']
 
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.title)
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
 class AuthUser(models.Model):
     login = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=100)

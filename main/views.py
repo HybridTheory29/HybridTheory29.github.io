@@ -6,7 +6,7 @@ from django.views.generic.list import  ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from main.models import Task
+from main.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -45,6 +45,15 @@ def reg_view(request):
 def logout_view(request):
     user_logout(request)
     return HttpResponseRedirect('/login')
+
+def lists(request):
+    categories = Category.objects.all()
+
+    context = {
+    'categories': categories
+    }
+
+    return render(request, 'main/lists.html', context)
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
