@@ -173,17 +173,3 @@ body{
     margin-right: 14px;
     line-height: 0; 
 }
-
-.card-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border-left: 2px solid rgb(255, 255, 255, .2);
-    border-right: 2px solid rgb(255, 255, 255, .2);
-    border-bottom: 2px solid rgb(255, 255, 255, .2);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgb(0, 0, 0, .2);
-    color: #fff;
-    padding: 20px 20px;
-}
