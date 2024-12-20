@@ -8,16 +8,13 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <div class="header-bar">
-        <a href="{% url 'tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
-    </div>
-    
     <div class="delete-body">
+        <a href="{% url 'tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
         <form method="POST">
         {% csrf_token %}
-        <p style="font-size: 20px">Удалить задачу "{{ task }}"?</p>
+        <p style="font-size: 20px"><u>Удалить задачу?</u></p>
         <input class="button" type="submit" value="Удалить"/>
-    </form>
+        </form>
     </div>
 </body>
 </html>

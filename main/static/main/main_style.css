@@ -6,8 +6,8 @@
 }
 
 body{
-    -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
-    box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+    /*-webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+    box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);*/
     min-height: 90vh;
     background: url("back.jpg") no-repeat;
     background-size: cover;
@@ -38,7 +38,6 @@ body{
 .header-bar a:hover{
     text-decoration: underline;
 }
-
 
 .task-wrapper{
     display: flex;
