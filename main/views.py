@@ -1,12 +1,13 @@
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template.context_processors import request
 from django.views.generic.list import  ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from main.models import *
+from main.forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -81,10 +82,24 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
 
+"""
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['title', 'description']
+    fields = ['title', "description"]
     success_url = reverse_lazy('tasks')
+"""
+
+def taskUpdate(request, pk):
+    instance = get_object_or_404(Task, pk=pk)
+    if request.method == 'POST':
+        form = MyModelForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = MyModelForm(instance=instance)
+    return render(request, 'main/task_form.html', {'form': form})
+
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task

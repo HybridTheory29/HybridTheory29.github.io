@@ -8,15 +8,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <!--<div class="header-bar">
-        <a href="{% url 'tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
-    </div>-->
     <div class="card-body">
         <a href="{% url 'tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
         <form method="POST" action="">
-            <input type="text" name="title" placeholder="Заголовок" required>
-            <textarea class="descript" name="description" placeholder="Введите описание..."></textarea>
-            {% csrf_token %}    
+            {% csrf_token %}
+            <textarea class="titl" name="title" placeholder="Заголовок" required>{{ form.title.value }}</textarea>
+            <textarea class="descript" name="description" placeholder="Введите описание...">{{ form.description.value }}</textarea> 
             <input class="button" type="submit" value="Подтвердить">
         </form>
     </div>
