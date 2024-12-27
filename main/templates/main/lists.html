@@ -20,11 +20,19 @@
         {% endif %}
     </div>
 
+    <div id="search-add-wrapper">
+        <form class="search-form" method ="GET">
+            <input class="search-area" type="text" name="search-area" value="{{ search_input }}" placeholder="Поиск...">
+            <button class="button"><i class='bx bx-search-alt'></i></button>
+        </form>
+        <a id="add-link" href="{% url 'category-create' %}"><i class='bx bx-plus-circle'></i></a>
+    </div>
+
     <div>
         {% for category in categories %}
             <div class="task-wrapper">
                 <div class="task-title">
-                    <a href="#">{{ category }}</a>
+                    <a href="{{ category.get_absolute_url }}">{{ category }}</a>
                 </div>
             </div>
         {% empty %}

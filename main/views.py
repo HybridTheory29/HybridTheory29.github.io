@@ -50,11 +50,12 @@ def logout_view(request):
 def lists(request):
     categories = Category.objects.all()
 
-    context = {
-    'categories': categories
-    }
+    return render(request, 'main/lists.html', {'categories': categories})
 
-    return render(request, 'main/lists.html', context)
+def category_tasks(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    tasks = category.tasks.all()  # Получаем все задачи категории
+    return render(request, 'main/task_list.html', {'category': category, 'tasks': tasks})
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -82,22 +83,24 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
 
-"""
-class TaskUpdate(LoginRequiredMixin, UpdateView):
-    model = Task
-    fields = ['title', "description"]
-    success_url = reverse_lazy('tasks')
-"""
+class CategoryCreate(LoginRequiredMixin, CreateView):
+    model = Category
+    fields = ['name']
+    success_url = reverse_lazy('lists')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CategoryCreate, self).form_valid(form)
 
 def taskUpdate(request, pk):
     instance = get_object_or_404(Task, pk=pk)
     if request.method == 'POST':
-        form = MyModelForm(request.POST, instance=instance)
+        form = CategoryForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
-        form = MyModelForm(instance=instance)
+        form = CategoryForm(instance=instance)
     return render(request, 'main/task_form.html', {'form': form})
 
 

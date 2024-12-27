@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add task</title>
+    <link rel="stylesheet" href="../../static/main/func_style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="card-body">
+        <a href="{% url 'tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <textarea class="titl" name="title" placeholder="Заголовок" required>{{ form.title.value }}</textarea> 
+            <input class="button" type="submit" value="Подтвердить">
+        </form>
+    </div>
+</body>
+</html>
