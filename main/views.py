@@ -54,7 +54,7 @@ def lists(request):
 
 def category_tasks(request, category_id):
     category = get_object_or_404(Category, id=category_id)
-    tasks = category.tasks.all()  # Получаем все задачи категории
+    tasks = category.tasks.all()
     return render(request, 'main/task_list.html', {'category': category, 'tasks': tasks})
 
 class TaskList(LoginRequiredMixin, ListView):
