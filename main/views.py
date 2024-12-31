@@ -52,10 +52,18 @@ def lists(request):
 
     return render(request, 'main/lists.html', {'categories': categories})
 
-def category_tasks(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
+def category_tasks(request, pk):
+    category = get_object_or_404(Category, id=pk)
     tasks = category.tasks.all()
     return render(request, 'main/task_list.html', {'category': category, 'tasks': tasks})
+
+class CategoryList(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = 'main/lists.html'
+    context_object_name = 'categories'
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -77,16 +85,21 @@ class TaskList(LoginRequiredMixin, ListView):
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = ['title', 'description']
-    success_url = reverse_lazy('tasks')
 
     def form_valid(self, form):
+        category_id = self.kwargs['category_id']
+        category = get_object_or_404(Category, pk=category_id, user=self.request.user)
+        form.instance.category = category
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('category_tasks', kwargs={'pk': self.object.category.pk})
 
 class CategoryCreate(LoginRequiredMixin, CreateView):
     model = Category
     fields = ['name']
-    success_url = reverse_lazy('lists')
+    success_url = reverse_lazy('category-list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -107,7 +120,7 @@ def taskUpdate(request, pk):
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
-    success_url = reverse_lazy('tasks')
+    success_url = reverse_lazy('category_tasks')
 
 def task_important(request, pk):
     item = Task.objects.get(id=pk)
@@ -116,7 +129,7 @@ def task_important(request, pk):
     else:
         item.important = False
     item.save()
-    return redirect('tasks')
+    return redirect('category_tasks')
 
 def task_complete(request, pk):
     item = Task.objects.get(id=pk)
@@ -125,4 +138,4 @@ def task_complete(request, pk):
     else:
         item.complete = False
     item.save()
-    return redirect('tasks')
+    return redirect('category_tasks')

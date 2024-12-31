@@ -9,11 +9,11 @@
 </head>
 <body>
     <div class="card-body">
-        <a href="{% url 'tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
+        <a href="{% url 'category-list' %}"><i class='bx bx-arrow-back'></i></i></a>
         <form method="POST" action="">
             {% csrf_token %}
-            <textarea class="titl" name="title" placeholder="Заголовок" required>{{ form.title.value }}</textarea> 
-            <input class="button" type="submit" value="Подтвердить">
+            <textarea class="titl" name="name" placeholder="Заголовок" required>{{ form.title.value }}</textarea> 
+            <input class="button" type="submit" value="Подтвердить">1
         </form>
     </div>
 </body>

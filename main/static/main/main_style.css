@@ -12,8 +12,10 @@ body{
     background: url("back.jpg") no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     margin-left: 15px;
     margin-right: 15px;
+    overflow-y: scroll;
 }
 
 .header-bar{
