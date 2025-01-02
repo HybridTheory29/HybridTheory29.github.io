@@ -87,7 +87,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     fields = ['title', 'description']
 
     def form_valid(self, form):
-        category_id = self.kwargs['category_id']
+        category_id = self.kwargs['pk']
         category = get_object_or_404(Category, pk=category_id, user=self.request.user)
         form.instance.category = category
         form.instance.user = self.request.user
@@ -119,8 +119,13 @@ def taskUpdate(request, pk):
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
-    context_object_name = 'task'
-    success_url = reverse_lazy('category_tasks')
+    template_name = 'main/task_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('category_tasks', kwargs={'pk': self.object.category.pk})
+
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
 
 def task_important(request, pk):
     item = Task.objects.get(id=pk)

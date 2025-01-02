@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="delete-body">
-        <a href="{% url 'tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
+        <a href="{% url 'category_tasks' %}"><i class='bx bx-arrow-back'></i></i></a>
         <form method="POST">
         {% csrf_token %}
         <p style="font-size: 20px"><u>Удалить задачу?</u></p>

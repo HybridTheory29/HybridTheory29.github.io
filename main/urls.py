@@ -13,9 +13,9 @@ urlpatterns = [
     #path('task/<int:pk>/', TaskDetail.as_view(), name='task'),
     #path('task-create/', TaskCreate.as_view(), name='task-create'),
     path('task-update/<int:pk>/', taskUpdate, name='task-update'), #TaskUpdate.as_view()
-    path('task-delete/<int:pk>/', TaskDelete.as_view(), name='task-delete'),
+    path('category-<int:pk>/task-delete/', TaskDelete.as_view(), name='task-delete'),
     path('important-item/<int:pk>/', task_important, name='important-item'),
     path('complete-task/<int:pk>/', task_complete, name='task-complete'),
     path('category-create/', CategoryCreate.as_view(), name='category-create'),
-    path('category-<int:pk>/task-create', TaskCreate.as_view(), name='task-create'),
+    path('category-<int:pk>/task-create/', TaskCreate.as_view(), name='task-create'),
 ]
