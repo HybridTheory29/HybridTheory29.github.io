@@ -9,7 +9,7 @@ urlpatterns = [
     path('registration/', reg_view, name='registration'),
     #path('', TaskList.as_view(), name='tasks'),
     path('', CategoryList.as_view(), name='category-list'),
-    path('category/<int:pk>/', category_tasks, name='category_tasks'),
+    path('category-<int:pk>/', category_tasks, name='category_tasks'),
     #path('task/<int:pk>/', TaskDetail.as_view(), name='task'),
     #path('task-create/', TaskCreate.as_view(), name='task-create'),
     path('task-update/<int:pk>/', taskUpdate, name='task-update'), #TaskUpdate.as_view()
@@ -17,5 +17,5 @@ urlpatterns = [
     path('important-item/<int:pk>/', task_important, name='important-item'),
     path('complete-task/<int:pk>/', task_complete, name='task-complete'),
     path('category-create/', CategoryCreate.as_view(), name='category-create'),
-    path('category/<int:category_id>/task/create/', TaskCreate.as_view(), name='task-create'),
+    path('category-<int:pk>/task-create', TaskCreate.as_view(), name='task-create'),
 ]
