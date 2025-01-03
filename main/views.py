@@ -84,17 +84,23 @@ class TaskList(LoginRequiredMixin, ListView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
+    template_name = 'main/task_form.html'
     fields = ['title', 'description']
 
     def form_valid(self, form):
-        category_id = self.kwargs['pk']
-        category = get_object_or_404(Category, pk=category_id, user=self.request.user)
-        form.instance.category = category
-        form.instance.user = self.request.user
-        return super(TaskCreate, self).form_valid(form)
+        category = Category.objects.get(pk=self.kwargs['category_id'])
+        form.instance.category = category  # Привязываем задачу к категории
+        form.instance.user = self.request.user  # Привязываем задачу к пользователю
+        return super().form_valid(form)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.get(pk=self.kwargs['category_id'])
+        return context
+
     def get_success_url(self):
-        return reverse_lazy('category_tasks', kwargs={'pk': self.object.category.pk})
+        # Перенаправляем на страницу категории после создания задачи
+        return reverse_lazy('category_tasks', kwargs={'pk': self.kwargs['category_id']})
 
 class CategoryCreate(LoginRequiredMixin, CreateView):
     model = Category
@@ -105,27 +111,39 @@ class CategoryCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(CategoryCreate, self).form_valid(form)
 
-def taskUpdate(request, pk):
-    instance = get_object_or_404(Task, pk=pk)
-    if request.method == 'POST':
-        form = CategoryForm(request.POST, instance=instance)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    else:
-        form = CategoryForm(instance=instance)
-    return render(request, 'main/task_form.html', {'form': form})
+class TaskUpdateView(UpdateView):
+    model = Task
+    template_name = 'main/task_form.html'
+    fields = ['title', 'description']
 
+    def form_valid(self, form):
+        # Привязываем задачу к существующей категории
+        task = form.save(commit=False)
+        task.category = get_object_or_404(Category, pk=self.kwargs['category_id'])
+        task.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = get_object_or_404(Category, pk=self.kwargs['category_id'])
+        return context
+
+    def get_success_url(self):
+        # Перенаправляем на страницу категории после обновления задачи
+        return reverse_lazy('category_tasks', kwargs={'pk': self.kwargs['category_id']})
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'main/task_confirm_delete.html'
 
     def get_success_url(self):
+        # Перенаправление на страницу категории задачи
         return reverse_lazy('category_tasks', kwargs={'pk': self.object.category.pk})
 
-    def get_queryset(self):
-        return super().get_queryset().filter(user=self.request.user)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.object.category  # Передаем категорию в шаблон
+        return context
 
 def task_important(request, pk):
     item = Task.objects.get(id=pk)
