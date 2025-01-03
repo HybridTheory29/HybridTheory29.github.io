@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.template.context_processors import request
 from django.views.generic.list import  ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.views import View
 
 from main.models import *
 from main.forms import *
@@ -145,20 +146,16 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
         context['category'] = self.object.category  # Передаем категорию в шаблон
         return context
 
-def task_important(request, pk):
-    item = Task.objects.get(id=pk)
-    if not item.important:
-        item.important = True
-    else:
-        item.important = False
-    item.save()
-    return redirect('category_tasks')
+def task_important(request, category_id, pk):
+    task = get_object_or_404(Task, pk=pk, category_id=category_id)
+    task.important = not task.important
+    task.save()
 
-def task_complete(request, pk):
-    item = Task.objects.get(id=pk)
-    if not item.complete:
-        item.complete = True
-    else:
-        item.complete = False
-    item.save()
-    return redirect('category_tasks')
+    return redirect(reverse('category_tasks', kwargs={'pk': category_id}))
+
+def task_complete(request, category_id, pk):
+    task = get_object_or_404(Task, pk=pk, category_id=category_id)
+    task.complete = not task.complete
+    task.save()
+
+    return redirect(reverse('category_tasks', kwargs={'pk': category_id}))

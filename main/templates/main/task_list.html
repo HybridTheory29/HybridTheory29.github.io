@@ -38,14 +38,14 @@
                         <s><a href="{% url 'task-update' category.id task.id %}">{{ task }}</a></s>
                     </div>
                 </div>
-                <a class="complete-link" href="{% url 'task-complete' task.id %}"><i class='bx bx-check-double' ></i></a>
+                <a class="complete-link" href="{% url 'task-complete' category.id task.id %}"><i class='bx bx-check-double' ></i></a>
             {% else %}
                 <div class="task-title">
                     <div class="task-incomplete-icon">
                         <a href="{% url 'task-update' category.id task.id %}">{{ task }}</a>
                     </div>
                 </div>
-                <a class="complete-link" href="{% url 'task-complete' task.id %}"><i class='bx bx-check' ></i></a>
+                <a class="complete-link" href="{% url 'task-complete' category.id task.id %}"><i class='bx bx-check' ></i></a>
             {% endif %}
             {% if task.important %}
                 <a class="imp-butt" href="{% url 'important-item' category.id task.id %}"><i class='bx bxs-star'></i></a>
