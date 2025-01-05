@@ -66,6 +66,29 @@ class CategoryList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
 
+class CategoryTasks(ListView):
+    model = Task
+    template_name = 'main/task_list.html'
+    context_object_name = 'tasks'
+
+    def get_queryset(self):
+        category = Category.objects.get(pk=self.kwargs['pk'])
+        return Task.objects.filter(category=category)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.get(pk=self.kwargs['pk'])
+        context['count'] = context['tasks'].filter(complete=False).count()
+        search_input = self.request.GET.get('search-area') or ''
+        
+        if search_input:
+            context['tasks'] = context['tasks'].filter(title__startswith=search_input)
+
+        context['search_input'] = search_input
+
+        return context
+
+
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
