@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    important = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.name)
@@ -15,6 +16,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
+        ordering = ['-important']
 
 class Task(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='tasks', default=1)

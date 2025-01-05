@@ -138,13 +138,24 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     template_name = 'main/task_confirm_delete.html'
 
     def get_success_url(self):
-        # Перенаправление на страницу категории задачи
         return reverse_lazy('category_tasks', kwargs={'pk': self.object.category.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['category'] = self.object.category  # Передаем категорию в шаблон
+        context['category'] = self.object.category
         return context
+    
+class CategoryDelete(LoginRequiredMixin, DeleteView):
+    model = Category
+    template_name = 'main/category_confirm_delete.html'
+    success_url = reverse_lazy('category-list')
+
+def category_important(request, pk):
+    category = get_object_or_404(Category, pk=pk, user=request.user)
+    category.important = not category.important
+    category.save()
+
+    return redirect('category-list')
 
 def task_important(request, category_id, pk):
     task = get_object_or_404(Task, pk=pk, category_id=category_id)
