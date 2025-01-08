@@ -13,7 +13,7 @@ class Category(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('category_tasks', args=[str(self.pk)])
-
+    
     class Meta:
         verbose_name_plural = "Categories"
         ordering = ['-important']
