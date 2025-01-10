@@ -13,3 +13,4 @@ sqlparse==0.5.1
 urllib3==2.2.2
 virtualenv==20.28.0
 whitenoise==6.5.0
+decouple==0.0.7

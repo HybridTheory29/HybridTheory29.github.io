@@ -15,6 +15,7 @@
             <h1>Привет, {{ request.user|title }}</h1>
             <h3 style="margin: 0">У вас есть <i>{{ count }}</i> {{ count|default:0|ru_plural:"незавершенная,незавершенные,незавершенных" }} {{ count|default:0|ru_plural:"задача,задачи,задач" }}</h3>
         </div>
+        <a href="#">Заметки</a>
         <a href="{% url 'lists' %}" style="position: absolute; right:5.5%;">Списки задач</a>
         {% if request.user.is_authenticated %}
         <a href="{% url 'logout' %}">Выйти</a>
