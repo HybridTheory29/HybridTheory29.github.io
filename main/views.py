@@ -127,19 +127,7 @@ class CategoryUpdateView(UpdateView):
     template_name = 'main/category_form.html'
     fields = ['name']
 
-    def form_valid(self, form):
-        task = form.save(commit=False)
-        task.category = get_object_or_404(Category, pk=self.kwargs['category_id'])
-        task.save()
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = get_object_or_404(Category, pk=self.kwargs['category_id'])
-        return context
-
-    def get_success_url(self):
-        return reverse_lazy('category_tasks', kwargs={'pk': self.kwargs['category_id']})
+    success_url = reverse_lazy('category-list')
 
 class TaskUpdateView(UpdateView):
     model = Task

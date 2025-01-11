@@ -13,7 +13,7 @@
         <a href="{% url 'category-list' %}"><i class='bx bx-arrow-back'></i></i></a>
         <form method="POST" action="">
             {% csrf_token %}
-            <textarea class="titl" name="name" placeholder="Заголовок" required>{{ form.title.value }}</textarea> 
+            <textarea class="titl" name="name" placeholder="Заголовок" required>{{ form.name.value }}</textarea> 
             <input class="button" type="submit" value="Подтвердить">
         </form>
     </div>

@@ -35,7 +35,7 @@
                 <div class="task-title">
                     <a href="{{ category.get_absolute_url }}">{{ category }}</a>
                 </div>
-                <a class="edit-link" href="{% url 'category-edit' category.pk %}"><i class='bx bx-edit-alt'></i></a>
+                <a class="edit-link" href="{% url 'category-update' category.pk %}"><i class='bx bx-edit-alt'></i></a>
                 {% if category.important %}
                     <a class="imp-butt" href="{% url 'category-important' category.pk %}"><i class='bx bxs-star'></i></a>
                 {% else %}

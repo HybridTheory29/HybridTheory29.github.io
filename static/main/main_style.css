@@ -175,5 +175,11 @@ body{
 }
 
 .edit-link {
-    
+    text-decoration: none;
+    color: #644d2a;
+    font-size: 23px;
+    line-height: 0;
+    position: absolute;
+    right: 98px;
+    -webkit-text-stroke: 0.5px black;
 }
