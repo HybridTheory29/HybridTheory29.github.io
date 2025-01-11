@@ -14,6 +14,7 @@ urlpatterns = [
     path('category-<int:pk>/category-delete/', CategoryDelete.as_view(), name='category-delete'),
     path('category-<int:category_id>/task-create/', TaskCreate.as_view(), name='task-create'),
     path('category-<int:category_id>/task-<int:pk>/task-update/', TaskUpdateView.as_view(), name='task-update'),
+    path('category-<int:category_id>/category-update/', CategoryUpdateView.as_view(), name="category-update"),
     path('category-<int:category_id>/task-<int:pk>/delete/', TaskDelete.as_view(), name='task-delete'),
     path('category-<int:category_id>/task-<int:pk>/important-item/', task_important, name='important-item'),
     path('category-<int:category_id>/task-<int:pk>/complete/', task_complete, name='task-complete'),

@@ -53,11 +53,6 @@ def lists(request):
 
     return render(request, 'main/lists.html', {'categories': categories})
 
-def category_tasks(request, pk):
-    category = get_object_or_404(Category, id=pk)
-    tasks = category.tasks.all()
-    return render(request, 'main/task_list.html', {'category': category, 'tasks': tasks})
-
 class CategoryList(LoginRequiredMixin, ListView):
     model = Category
     template_name = 'main/lists.html'
@@ -65,6 +60,17 @@ class CategoryList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_input = self.request.GET.get('search-area') or ''
+        
+        if search_input:
+            context['categories'] = context['categories'].filter(name__startswith=search_input)
+
+        context['search_input'] = search_input
+
+        return context
 
 class CategoryTasks(ListView):
     model = Task
@@ -88,24 +94,6 @@ class CategoryTasks(ListView):
 
         return context
 
-
-class TaskList(LoginRequiredMixin, ListView):
-    model = Task
-    context_object_name = 'tasks'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tasks'] = context['tasks'].filter(user=self.request.user)
-        context['count'] = context['tasks'].filter(complete=False).count()
-
-        search_input = self.request.GET.get('search-area') or ''
-        if search_input:
-            context['tasks'] = context['tasks'].filter(title__startswith=search_input)
-
-        context['search_input'] = search_input
-
-        return context
-
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     template_name = 'main/task_form.html'
@@ -113,8 +101,8 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         category = Category.objects.get(pk=self.kwargs['category_id'])
-        form.instance.category = category  # Привязываем задачу к категории
-        form.instance.user = self.request.user  # Привязываем задачу к пользователю
+        form.instance.category = category
+        form.instance.user = self.request.user
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
@@ -123,7 +111,6 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        # Перенаправляем на страницу категории после создания задачи
         return reverse_lazy('category_tasks', kwargs={'pk': self.kwargs['category_id']})
 
 class CategoryCreate(LoginRequiredMixin, CreateView):
@@ -135,13 +122,12 @@ class CategoryCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(CategoryCreate, self).form_valid(form)
 
-class TaskUpdateView(UpdateView):
-    model = Task
-    template_name = 'main/task_form.html'
-    fields = ['title', 'description']
+class CategoryUpdateView(UpdateView):
+    model = Category
+    template_name = 'main/category_form.html'
+    fields = ['name']
 
     def form_valid(self, form):
-        # Привязываем задачу к существующей категории
         task = form.save(commit=False)
         task.category = get_object_or_404(Category, pk=self.kwargs['category_id'])
         task.save()
@@ -153,7 +139,25 @@ class TaskUpdateView(UpdateView):
         return context
 
     def get_success_url(self):
-        # Перенаправляем на страницу категории после обновления задачи
+        return reverse_lazy('category_tasks', kwargs={'pk': self.kwargs['category_id']})
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    template_name = 'main/task_form.html'
+    fields = ['title', 'description']
+
+    def form_valid(self, form):
+        task = form.save(commit=False)
+        task.category = get_object_or_404(Category, pk=self.kwargs['category_id'])
+        task.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = get_object_or_404(Category, pk=self.kwargs['category_id'])
+        return context
+
+    def get_success_url(self):
         return reverse_lazy('category_tasks', kwargs={'pk': self.kwargs['category_id']})
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
