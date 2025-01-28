@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('registration/', reg_view, name='registration'),
     path('', CategoryList.as_view(), name='category-list'),
+    path('notes/', NoteList.as_view(), name='notes-list'),
     path('category-create/', CategoryCreate.as_view(), name='category-create'),
     path('category-<int:pk>/', CategoryTasks.as_view(), name='category_tasks'),
     path('category-<int:pk>/category-important/', category_important, name='category-important'),

@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import localtime, now
 # Create your models here.
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     important = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=now)
 
     def __str__(self):
         return str(self.name)
@@ -24,7 +26,6 @@ class Task(models.Model):
     title = models.CharField(max_length=120, null=True, blank=True, verbose_name=u"Заголовок", default="")
     description = models.TextField(null=True, blank=True, verbose_name=u"Описание", default="")
     complete =  models.BooleanField(default=False, verbose_name=u"Состояние")
-    created = models.DateTimeField(auto_now_add=True)
     important = models.BooleanField(default=False)
 
     def __str__(self):
@@ -32,6 +33,14 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['-important', 'complete']
+
+class Note(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=100, null=True, blank=True, default="")
+    text = models.TextField(null=True, blank=True, default="")
+
+    def __str__(self):
+        return str(self.title)
 
 class AuthUser(models.Model):
     login = models.CharField(max_length=100, unique=True)

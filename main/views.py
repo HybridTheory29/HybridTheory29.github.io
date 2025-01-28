@@ -12,6 +12,7 @@ from main.forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.utils import timezone
 
 def login_view(request):
     if request.method == 'POST':
@@ -91,6 +92,19 @@ class CategoryTasks(ListView):
             context['tasks'] = context['tasks'].filter(title__startswith=search_input)
 
         context['search_input'] = search_input
+
+        return context
+    
+class NoteList(ListView):
+    model = Note
+    template_name = 'main/notes_list.html'
+    context_object_name = 'notes'
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
         return context
 

@@ -13,7 +13,7 @@
         <div>
             <h1>Списки задач</h1>
         </div>
-        <a href="#" style="position: absolute; right: 100px">Заметки</a>
+        <a href="{% url 'notes-list' %}" style="position: absolute; right: 190px">Заметки</a>
         {% if request.user.is_authenticated %}
         <a href="{% url 'logout' %}">Выйти</a>
         {% else %}
@@ -34,6 +34,7 @@
             <div class="task-wrapper">
                 <div class="task-title">
                     <a href="{{ category.get_absolute_url }}">{{ category }}</a>
+                    <span class="create-date">{{ category.created_at|date:"d M Y H:i" }}</span>
                 </div>
                 <a class="edit-link" href="{% url 'category-update' category.pk %}"><i class='bx bx-edit-alt'></i></a>
                 {% if category.important %}
