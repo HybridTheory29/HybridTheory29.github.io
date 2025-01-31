@@ -1,13 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.timezone import localtime, now
-# Create your models here.
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from datetime import datetime
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     important = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.name)
@@ -27,6 +29,8 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True, verbose_name=u"Описание", default="")
     complete =  models.BooleanField(default=False, verbose_name=u"Состояние")
     important = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.title)
@@ -48,3 +52,13 @@ class AuthUser(models.Model):
 
     def __str__(self):
         return self.login
+    
+@receiver(pre_save, sender=Category)
+def update_created_at(sender, instance, **kwargs):
+    if instance.pk:
+        instance.created_at = datetime.now()
+
+@receiver(pre_save, sender=Task)
+def update_created_at(sender, instance, **kwargs):
+    if instance.pk:
+        instance.created_at = datetime.now()

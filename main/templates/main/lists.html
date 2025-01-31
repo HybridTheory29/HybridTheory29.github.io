@@ -34,7 +34,7 @@
             <div class="task-wrapper">
                 <div class="task-title">
                     <a href="{{ category.get_absolute_url }}">{{ category }}</a>
-                    <span class="create-date">{{ category.created_at|date:"d M Y H:i" }}</span>
+                    <span class="create-date">{{ category.created_at }}</span>
                 </div>
                 <a class="edit-link" href="{% url 'category-update' category.pk %}"><i class='bx bx-edit-alt'></i></a>
                 {% if category.important %}

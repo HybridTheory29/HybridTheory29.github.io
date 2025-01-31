@@ -29,9 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['todolist29.pythonanywhere.com', 'localhost', '127.0.0.1']
 
-TIME_ZONE = 'Europe/Moscow'
-USE_TZ = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -117,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 

@@ -5,7 +5,7 @@ from django.template.context_processors import request
 from django.views.generic.list import  ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
-from django.views import View
+from django.utils.timezone import localtime
 
 from main.models import *
 from main.forms import *
