@@ -192,7 +192,7 @@
     .create-date-desktop {
         visibility: visible;
         position: absolute;
-        right: 45%;
+        right: 46%;
         color: #333;
     }
 
@@ -246,6 +246,10 @@
     }
     .header-bar .zametki{
         position: absolute; right: 22%
+    }
+    .header-bar .categoriee{
+        position: absolute;
+        right: 41%;
     }
 
     .task-wrapper{
