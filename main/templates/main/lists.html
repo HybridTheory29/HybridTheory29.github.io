@@ -11,9 +11,8 @@
 <body>
     <div class="header-bar">
         <div>
-            <h1>Списки задач</h1>
+            <h1 class="to_main_btn">Списки задач</h1>
         </div>
-        <a class='zametki' href="{% url 'notes-list' %}">Заметки</a>
         {% if request.user.is_authenticated %}
         <a href="{% url 'logout' %}">Выйти</a>
         {% else %}
@@ -33,9 +32,9 @@
         {% for category in categories %}
             <div class="task-wrapper">
                 <div class="task-title">
-                    <a href="{{ category.get_absolute_url }}"><span class="counter">{{ forloop.counter }}.</span> {{ category }}</a>
+                    <a class="desktop"href="{{ category.get_absolute_url }}"><span class="counter">{{ forloop.counter }}.</span> {{ category }}</a>
                     <a class="mobile" href="{{ category.get_absolute_url }}"><span class="counter">{{ forloop.counter }}.</span> категория</a>
-                    <!--<span class="create-date create-date-mobile">{{ category.created_at|date:'d.m.y H:i' }}</span>-->
+                    <span class="create-date-mobile">{{ category.created_at|date:'d.m.y' }}</span>
                 </div>
                 <a class="edit-link" href="{% url 'category-update' category.pk %}"><i class='bx bx-edit-alt'></i></a>
                 {% if category.important %}

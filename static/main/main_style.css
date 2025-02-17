@@ -43,6 +43,10 @@
     .header-bar .zametki{
         position: absolute; right: 10%
     }
+    .header-bar .categoriee{
+        position: absolute;
+        right: 10%;
+    }
 
     .task-wrapper{
         display: flex;
@@ -57,7 +61,14 @@
         color: #fff;
         padding: 20px 20px;
     }
-    .task-wrapper .task-title a{
+    .task-wrapper .task-title .task-name{
+        text-decoration: none;
+        color: #fff;
+        position: absolute;
+        left: 4%;
+        top: 37%;
+    }
+    .task-wrapper .task-title .desktop{
         visibility: visible;
         margin-left: 22px;
         text-decoration: none;
@@ -266,7 +277,14 @@
     .task-wrapper .task-title{
         width: 10%;
     }
-    .task-wrapper .task-title a{
+    .task-wrapper .task-title .task-name{
+        text-decoration: none;
+        color: #fff;
+        position: absolute;
+        left: 15%;
+        top: 40%;
+    }
+    .task-wrapper .task-title .desktop{
         visibility: visible;
         margin-left: 50%;
         text-decoration: none;
@@ -456,7 +474,7 @@
         padding: 15px 20px;
     }
     .header-bar a{
-        color: #fff;
+        color: rgb(218, 218, 218);
         text-decoration: none;
         font-weight: 600;
     }
@@ -464,11 +482,14 @@
         text-decoration: underline;
     }
     .header-bar .zametki{
-        position: absolute; right: 22%
+        position: absolute;
+        top: 6%;
+        right: 8%;
     }
     .header-bar .categoriee{
         position: absolute;
-        right: 41%;
+        right: 25%;
+        color: rgb(218, 218, 218);
     }
 
     .task-wrapper{
@@ -486,21 +507,19 @@
         width: 100%;
         overflow: hidden;
     }
-   /* .task-wrapper .task-title{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 0;
-        margin: 0;
-        width: 10%;
-        border: 1px solid #000000;
-        width: 100px;
-    }*/
     .task-wrapper .task-title{
         width: 10%;
+        display: flex;
     }
-    .task-wrapper .task-title a{
-        visibility: hidden;
+    .task-wrapper .task-title .task-name{
+        text-decoration: none;
+        color: #fff;
+        position: absolute;
+        left: 15%;
+        top: 40%;
+    }
+    .task-wrapper .task-title .desktop{
+        display: none;
     }
     .task-wrapper .task-title .mobile {
         visibility: visible;
@@ -514,12 +533,15 @@
         width: 20px;
         background-color: rgb(105, 192, 105);
         border-radius: 50%;
+        position: absolute;
+        top: 50%;
     }
     .task-wrapper .task-incomplete-icon{
         height: 20px;
         width: 20px;
         background-color: rgb(218, 218, 218);
         border-radius: 50%;
+        margin-top: 5px;
     }
     .delete-link {
         text-decoration: none;
@@ -633,12 +655,15 @@
     .create-date-mobile {
         visibility: visible;
         position: absolute;
+        top: 40%;
         right: 42%;
         color: #333;
+        font-weight: 500;
+        font-size: 17px;
     }
     .counter {
         position: absolute;
         left: 5%;
         color: rgb(218, 218, 218);
     }
-  }
+}
