@@ -33,19 +33,25 @@
         padding: 15px 20px;
     }
     .header-bar a{
-        color: #fff;
+        color: rgb(218, 218, 218);
         text-decoration: none;
         font-weight: 600;
+    }
+    .header-bar .categoriee{
+        position: absolute;
+        right: 260px;
+        color: rgb(218, 218, 218);
     }
     .header-bar a:hover{
         text-decoration: underline;
     }
     .header-bar .zametki{
-        position: absolute; right: 10%
+        position: absolute; right: 22%
     }
-    .header-bar .categoriee{
+    .header-bar .account{
         position: absolute;
-        right: 10%;
+        right: 180px;
+        color: rgb(218, 218, 218);
     }
 
     .task-wrapper{
@@ -65,7 +71,7 @@
         text-decoration: none;
         color: #fff;
         position: absolute;
-        left: 4%;
+        left: 55px;
         top: 37%;
     }
     .task-wrapper .task-title .desktop{
@@ -78,7 +84,7 @@
         flex-grow: 1;
     }
     .task-wrapper .task-title .mobile{
-        visibility: hidden;
+        display: none;
     }
     .task-wrapper .task-complete-icon{
         height: 20px;
@@ -246,9 +252,14 @@
         padding: 15px 20px;
     }
     .header-bar a{
-        color: #fff;
+        color: rgb(218, 218, 218);
         text-decoration: none;
         font-weight: 600;
+    }
+    .header-bar .categoriee{
+        position: absolute;
+        right: 170px;
+        color: rgb(218, 218, 218);
     }
     .header-bar a:hover{
         text-decoration: underline;
@@ -256,9 +267,10 @@
     .header-bar .zametki{
         position: absolute; right: 22%
     }
-    .header-bar .categoriee{
+    .header-bar .account{
         position: absolute;
-        right: 41%;
+        right: 90px;
+        color: rgb(218, 218, 218);
     }
 
     .task-wrapper{
@@ -276,40 +288,25 @@
     }
     .task-wrapper .task-title{
         width: 10%;
+        display: flex;
     }
     .task-wrapper .task-title .task-name{
         text-decoration: none;
         color: #fff;
         position: absolute;
-        left: 15%;
-        top: 40%;
+        left: 55px;
+        top: 25px;
     }
     .task-wrapper .task-title .desktop{
+        display: none;
+    }
+    .task-wrapper .task-title .mobile {
         visibility: visible;
         margin-left: 50%;
         text-decoration: none;
         color: #fff;
         white-space: nowrap;
     }
-    .task-wrapper .task-title .mobile {
-        visibility: hidden;
-        margin-left: 50%;
-        text-decoration: none;
-        color: #fff;
-        white-space: nowrap;
-    }
-    /*.task-wrapper .task-title{
-        width: 10%;
-    }
-    .task-wrapper .task-title a{
-        visibility: visible;
-        text-decoration: none;
-        color: #fff;
-        white-space: nowrap;
-    }
-    .task-wrapper .task-title .mobile {
-        visibility: hidden;
-    }*/
     .task-wrapper .task-complete-icon{
         height: 20px;
         width: 20px;
@@ -432,16 +429,16 @@
     }
 
     .create-date-desktop {
-        visibility: hidden;
-        position: absolute;
-        right: 45%;
-        color: #333;
+        display: none;
     }
     .create-date-mobile {
         visibility: visible;
         position: absolute;
+        top: 40%;
         right: 42%;
-        color: #333;
+        color: rgb(218, 218, 218);
+        font-weight: 500;
+        font-size: 17px;
     }
     .counter {
         position: absolute;
@@ -488,7 +485,12 @@
     }
     .header-bar .categoriee{
         position: absolute;
-        right: 25%;
+        right: 170px;
+        color: rgb(218, 218, 218);
+    }
+    .header-bar .account{
+        position: absolute;
+        right: 90px;
         color: rgb(218, 218, 218);
     }
 
@@ -656,7 +658,7 @@
         position: absolute;
         top: 40%;
         right: 42%;
-        color: #333;
+        color: rgb(218, 218, 218);
         font-weight: 500;
         font-size: 17px;
     }
