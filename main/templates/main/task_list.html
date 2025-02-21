@@ -49,6 +49,7 @@
                 </div>
                 <a class="complete-link" href="{% url 'task-complete' category.id task.id %}"><i class='bx bx-check' ></i></a>
             {% endif %}
+            <span class="create-date-desktop">{{ category.created_at|date:'d.m.y H:i' }}</span>
             {% if task.important %}
                 <a class="imp-butt" href="{% url 'important-item' category.id task.id %}"><i class='bx bxs-star'></i></a>
             {% else %}

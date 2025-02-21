@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from datetime import datetime
 
 class Category(models.Model):
-    name = models.CharField(max_length=22, default="")
+    name = models.CharField(max_length=50, default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     important = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)

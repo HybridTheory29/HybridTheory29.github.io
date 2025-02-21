@@ -35,6 +35,7 @@
                     <a class="desktop"href="{{ category.get_absolute_url }}"><span class="counter">{{ forloop.counter }}.</span> {{ category }}</a>
                     <a class="mobile" href="{{ category.get_absolute_url }}"><span class="counter">{{ forloop.counter }}.</span> категория</a>
                     <span class="create-date-mobile">{{ category.created_at|date:'d.m.y' }}</span>
+                    <span class="create-date-desktop">{{ category.created_at|date:'d.m.y H:i' }}</span>
                 </div>
                 <a class="edit-link" href="{% url 'category-update' category.pk %}"><i class='bx bx-edit-alt'></i></a>
                 {% if category.important %}
