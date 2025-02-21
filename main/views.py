@@ -49,6 +49,12 @@ def logout_view(request):
     user_logout(request)
     return HttpResponseRedirect('/login')
 
+def user_profile(request, username):
+    user = User.objects.get(username=username)
+    context = {"user": user}
+
+    return render(request, 'main/user_profile.html', context)
+
 def lists(request):
     categories = Category.objects.all()
 
@@ -94,7 +100,8 @@ class CategoryTasks(ListView):
         context['search_input'] = search_input
 
         return context
-    
+
+"""
 class NoteList(ListView):
     model = Note
     template_name = 'main/notes_list.html'
@@ -107,7 +114,8 @@ class NoteList(ListView):
         context = super().get_context_data(**kwargs)
 
         return context
-
+"""
+        
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     template_name = 'main/task_form.html'

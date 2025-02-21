@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from datetime import datetime
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=50, default="")
@@ -15,7 +16,6 @@ class Category(models.Model):
         return str(self.name)
     
     def get_absolute_url(self):
-        from django.urls import reverse
         return reverse('category_tasks', args=[str(self.pk)])
     
     class Meta:
@@ -38,6 +38,7 @@ class Task(models.Model):
     class Meta:
         ordering = ['-important', 'complete']
 
+"""
 class Note(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=100, null=True, blank=True, default="")
@@ -45,6 +46,7 @@ class Note(models.Model):
 
     def __str__(self):
         return str(self.title)
+"""
 
 class AuthUser(models.Model):
     login = models.CharField(max_length=100, unique=True)
@@ -62,3 +64,16 @@ def update_created_at(sender, instance, **kwargs):
 def update_created_at(sender, instance, **kwargs):
     if instance.pk:
         instance.created_at = datetime.now()
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'
+
+    def __str__(self):
+        return self.user.username
+    
+    def get_absolute_url(self):
+        return reverse('profile_detail', kwargs={'pk': self.pk})
